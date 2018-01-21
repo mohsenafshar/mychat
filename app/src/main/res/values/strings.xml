@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyChat</string>
+    <string name="user_image">user_image</string>
+    <string name="enter_message">Enter message ...</string>
+    <string name="send">Send</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+</resources>

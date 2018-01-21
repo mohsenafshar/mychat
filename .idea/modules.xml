@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MyChat.iml" filepath="$PROJECT_DIR$/MyChat.iml" />
+      <module fileurl="file://C:\Users\CH_dev-1\Desktop\Android-projects\MyChat\mychat\MyChat.iml" filepath="C:\Users\CH_dev-1\Desktop\Android-projects\MyChat\mychat\MyChat.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\CH_dev-1\Desktop\Android-projects\MyChat\mychat\app\app.iml" filepath="C:\Users\CH_dev-1\Desktop\Android-projects\MyChat\mychat\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mychat.iml" filepath="$PROJECT_DIR$/.idea/mychat.iml" />
     </modules>
   </component>
 </project>

@@ -25,7 +25,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
 
-        <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+        <com.vanniktech.emoji.EmojiEditText
             android:id="@+id/input_message"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -41,8 +41,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toEndOf="@+id/emojiButton"
-            app:layout_constraintTop_toTopOf="parent"
-            emojicon:emojiconSize="48sp"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
             android:id="@+id/button"
@@ -67,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/emoji_1f627"/>
+            app:srcCompat="@drawable/smiley"/>
 
 
     </android.support.constraint.ConstraintLayout>

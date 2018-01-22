@@ -3,6 +3,7 @@
     package="ir.mohsenafshar.android.mychat">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".BaseApplication"
@@ -25,9 +26,12 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="03596adc2a4c7190e7071f2bbdc18f5e0f54578e" />
+
+        <activity android:name=".test.TestKotlinActivity"></activity>
     </application>
 
 </manifest>

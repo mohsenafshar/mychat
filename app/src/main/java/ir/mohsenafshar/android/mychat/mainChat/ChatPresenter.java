@@ -1,10 +1,17 @@
 package ir.mohsenafshar.android.mychat.mainChat;
 
+import android.graphics.Bitmap;
+import android.util.Log;
+
 class ChatPresenter {
 
-    private IChatView iChatView;
+    private static final String TAG = "ChatPresenter";
 
-    public ChatPresenter(IChatView iChatView) {
-        this.iChatView = iChatView;
+    public ChatPresenter() {
+    }
+
+    public void setUserThumbnail(IChatAdapter iChatAdapter, Bitmap bitmap){
+        Log.d(TAG, "setUserThumbnail: ChatPresenter");
+        iChatAdapter.setUserPicture(bitmap);
     }
 }

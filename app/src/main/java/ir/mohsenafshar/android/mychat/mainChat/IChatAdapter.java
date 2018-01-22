@@ -1,8 +1,10 @@
 package ir.mohsenafshar.android.mychat.mainChat;
 
+
 import android.graphics.Bitmap;
 
-interface IChatView {
+public interface IChatAdapter {
 
-    public void setBitmap(Bitmap bitmap);
+    void setUserPicture(Bitmap bitmap);
+
 }

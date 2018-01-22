@@ -1,5 +1,6 @@
 package ir.mohsenafshar.android.mychat.mainChat;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -16,7 +17,7 @@ import java.util.List;
 import ir.mohsenafshar.android.mychat.R;
 import ir.mohsenafshar.android.mychat.pojo.Message;
 
-class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements IChatAdapter {
 
     private static final int ROW_RIGHT = 1;
     private static final int ROW_LEFT = 2;
@@ -24,6 +25,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Message> chatMessages;
     private ChatPresenter chatPresenter;
+    private Bitmap mBitmap;
 
     public ChatAdapter(ChatPresenter chatPresenter, List<Message> messages) {
         this.chatPresenter = chatPresenter;
@@ -74,6 +76,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             sb.setSpan(b, 0, username.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
 
             ((LeftViewHolder) holder).usernameTexView.setText(sb);
+            ((LeftViewHolder) holder).userImage.setImageBitmap(mBitmap);
 
             //((LeftViewHolder) holder).textMessage.setText(message);
         }
@@ -103,9 +106,9 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public RightViewHolder(View itemView) {
             super(itemView);
 
-            userImage = (ImageView) itemView.findViewById(R.id.userImageView);
+            userImage = itemView.findViewById(R.id.userImageViewLeft);
             //usernameTexView = itemView.findViewById(R.id.usernameRight);
-            textMessage = (TextView) itemView.findViewById(R.id.textViewRight);
+            textMessage = itemView.findViewById(R.id.textViewRight);
         }
     }
 
@@ -119,10 +122,16 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public LeftViewHolder(View itemView) {
             super(itemView);
 
-            userImage = (ImageView) itemView.findViewById(R.id.userImageView);
-            usernameTexView = (TextView) itemView.findViewById(R.id.usernameLeft);
-            textMessage = (TextView) itemView.findViewById(R.id.textViewLeft);
+            userImage = itemView.findViewById(R.id.userImageViewLeft);
+            usernameTexView = itemView.findViewById(R.id.usernameLeft);
+            textMessage = itemView.findViewById(R.id.textViewLeft);
         }
+    }
+
+    @Override
+    public void setUserPicture(Bitmap bitmap) {
+        Log.d(TAG, "setUserPicture: Adapter");
+        mBitmap = bitmap;
     }
 
 }

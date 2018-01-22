@@ -1,7 +1,10 @@
 package ir.mohsenafshar.android.mychat.mainChat;
 
 import android.app.Service;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +30,7 @@ import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +44,7 @@ import ir.mohsenafshar.android.mychat.login.LoginActivity;
 import ir.mohsenafshar.android.mychat.pojo.Message;
 
 public class ChatActivity extends AppCompatActivity
-        implements IChatView, NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String USER_ID = UUID.randomUUID().toString();
 
@@ -59,6 +63,7 @@ public class ChatActivity extends AppCompatActivity
     private ChatAdapter chatAdapter;
 
     private ChatPresenter chatPresenter;
+    private Bitmap bitmap;
 
     {
         try {
@@ -107,6 +112,18 @@ public class ChatActivity extends AppCompatActivity
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         setSupportActionBar(toolbar);
 
+        chatPresenter = new ChatPresenter();
+
+        Uri imageUri = getIntent().getData();
+        if(imageUri != null){
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                Log.d(TAG, "onCreate: Start of bitmap set");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
 
@@ -142,8 +159,10 @@ public class ChatActivity extends AppCompatActivity
         mSocket.connect();
         mSocket.on("chat message", onNewMessage);
 
-        chatPresenter = new ChatPresenter(this);
         chatAdapter = new ChatAdapter(chatPresenter, messages);
+        if(bitmap != null) {
+            chatAdapter.setUserPicture(bitmap);
+        }
 
         final LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, OrientationHelper.VERTICAL, false);

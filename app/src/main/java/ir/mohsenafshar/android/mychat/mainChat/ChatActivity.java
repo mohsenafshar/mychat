@@ -21,14 +21,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.Gson;
+import com.vanniktech.emoji.EmojiEditText;
+import com.vanniktech.emoji.EmojiManager;
+import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.ios.IosEmojiProvider;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -37,8 +39,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import ir.mohsenafshar.android.mychat.R;
 import ir.mohsenafshar.android.mychat.login.LoginActivity;
 import ir.mohsenafshar.android.mychat.pojo.Message;
@@ -55,7 +55,7 @@ public class ChatActivity extends AppCompatActivity
     private List<Message> messages;
 
     private DrawerLayout drawerLayout;
-    private EmojiconEditText messageInput;
+    private EmojiEditText messageInput;
     private RecyclerView recyclerView;
     private ImageView emojiButton;
 
@@ -106,8 +106,10 @@ public class ChatActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        EmojiManager.install(new IosEmojiProvider());
+
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         setSupportActionBar(toolbar);
@@ -197,9 +199,8 @@ public class ChatActivity extends AppCompatActivity
         //softKeyboard.openSoftKeyboard();
         //softKeyboard.closeSoftKeyboard();
 
-        View parent = findViewById(R.id.parent_card);
 
-        EmojIconActions emojIcon = new EmojIconActions(this, drawerLayout , messageInput, emojiButton);
+        /*EmojIconActions emojIcon = new EmojIconActions(this, drawerLayout , messageInput, emojiButton);
         emojIcon.ShowEmojIcon();
         emojIcon.setUseSystemEmoji(false);
 
@@ -212,6 +213,17 @@ public class ChatActivity extends AppCompatActivity
             @Override
             public void onKeyboardClose() {
                 Log.e("Keyboard", "close");
+            }
+        });*/
+
+        final EmojiPopup emojiPopup = EmojiPopup.Builder.fromRootView(drawerLayout).build(messageInput);
+        /*emojiPopup.dismiss(); // Dismisses the Popup.
+        emojiPopup.isShowing(); // Returns true when Popup is showing.*/
+
+        emojiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emojiPopup.toggle(); // Toggles visibility of the Popup.
             }
         });
 

@@ -179,7 +179,7 @@ public class ChatActivity extends AppCompatActivity
         });
 
         /*
-        * Commit 4
+        * Commit 3
         * */
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
